@@ -7,9 +7,11 @@ SIMULATE = os.getenv("SIMULATE", "True") == "True"
 def main():
     coin = fetch_trending_coin()
     if coin:
-        message = f"Trending Coin: {coin}"
-        send_alert(message)
-        simulate_trade(coin, SIMULATE)
+        entry_message = f"📈 Simulated BUY: {coin} (entry price simulated)"
+        send_alert(entry_message)
+        entry, exit = simulate_trade(coin, SIMULATE)
+        if entry and exit:
+            send_alert(f"📉 Simulated SELL: {coin} (exit price simulated)")
 
 if __name__ == "__main__":
     main()
