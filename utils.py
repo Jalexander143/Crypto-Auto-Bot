@@ -1,5 +1,6 @@
 import requests
 import random
+import time
 
 def fetch_trending_coin():
     try:
@@ -15,6 +16,12 @@ def fetch_trending_coin():
 
 def simulate_trade(coin, simulate=True):
     if simulate:
-        print(f"[SIMULATION] Would trade {coin}")
+        entry_price = round(random.uniform(1.0, 100.0), 2)
+        print(f"[SIMULATION] Buying {coin} at ${entry_price}")
+        time.sleep(2)  # Simulated time passing
+        exit_price = round(entry_price * random.uniform(1.02, 1.15), 2)
+        print(f"[SIMULATION] Selling {coin} at ${exit_price}")
+        return entry_price, exit_price
     else:
-        print(f"Placing real trade for {coin} (NOT IMPLEMENTED)")
+        print(f"[LIVE TRADING] Not yet implemented.")
+        return None, None
